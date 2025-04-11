@@ -45,8 +45,8 @@ export default function Header() {
   ];
 
   return (
-    <header className="relative">
-      <nav className="flex justify-between items-center p-4 w-full max-w-7xl mx-auto">
+    <header className="relative sticky top-0 z-50 backdrop-blur-sm bg-background/80">
+      <nav className="flex justify-between items-center p-4 max-w-7xl mx-auto">
         {/* Mobile Hamburger */}
         <Button
           variant="ghost"
@@ -83,16 +83,16 @@ export default function Header() {
         <NavigationMenu className="hidden md:flex">
           <NavigationMenuLink>
             {navigation.map((item) => (
-              <a
+              <NavigationMenuLink
                 key={item.name}
                 href={item.href}
-                className="text-sm font-roboto pr-4 hover:text-primary transition-colors relative group text-center"
-              >
+                className="text-sm font-roboto font-medium pr-4 hover:text-primary transition-colors relative group text-center"
+              > 
                 {item.name}
                 <span
                   className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 origin-left ${item.className}`}
                 ></span>
-              </a>
+              </NavigationMenuLink>
             ))}
           </NavigationMenuLink>
         </NavigationMenu>
@@ -123,7 +123,7 @@ export default function Header() {
             >
               {/* Logo in mobile menu */}
               <motion.div
-                className="flex justify-between items-center pb-2 border-b"
+                className="flex justify-between items-center pb-2"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{
@@ -152,9 +152,9 @@ export default function Header() {
                   }}
                   whileHover={{ x: 5 }}
                 >
-                  <span className="relative px-1">
+                  <span className="relative px-1 font-medium">
                     {item.name}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-[110%] origin-left"></span>
+                    <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 origin-left ${item.className}`}></span>
                   </span>
                 </motion.a>
               ))}
