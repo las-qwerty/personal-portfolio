@@ -45,7 +45,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="relative sticky top-0 z-50 backdrop-blur-sm bg-background/80">
+    <header className="sticky top-0 z-50 backdrop-blur-sm bg-background/80">
       <nav className="flex justify-between items-center p-4 max-w-7xl mx-auto">
         {/* Mobile Hamburger */}
         <Button
