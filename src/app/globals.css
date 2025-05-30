@@ -120,3 +120,34 @@
     @apply bg-background text-foreground;
   }
 }
+
+.lawrence-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: var(--background);
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+.lawrence-letter {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--primary);
+  opacity: 0;
+  animation: lawrence-fadein 0.7s forwards;
+}
+.lawrence-letter:not(:last-child) {
+  margin-right: 0.25em;
+}
+@keyframes lawrence-fadein {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}

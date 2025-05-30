@@ -5,8 +5,6 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Switch } from "@/components/ui/switch";
 
-import { cn } from "@/lib/utils";
-
 export function ModeToggle({ className }: { className?: string }) {
   const { theme, setTheme } = useTheme();
 

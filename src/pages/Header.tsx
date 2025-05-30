@@ -34,24 +34,52 @@ const ThemeLogo = ({ className = "" }) => {
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => setMounted(true), []);
 
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const navigation = [
-    { name: "Home", href: "/", className: "group-hover:w-[70%]" },
-    { name: "About", href: "/about", className: "group-hover:w-[70%]" },
-    { name: "Projects", href: "/projects", className: "group-hover:w-[80%]" },
-    { name: "Contact", href: "/contact", className: "group-hover:w-[80%]" },
+    { name: "Home", href: "/", className: "group-hover:w-[100%]" },
+    { name: "About", href: "/about", className: "group-hover:w-[100%]" },
+    { name: "Projects", href: "/projects", className: "group-hover:w-[100%]" },
+    { name: "Contact", href: "/contact", className: "group-hover:w-[100%]" },
   ];
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-sm bg-background/80">
-      <nav className="flex justify-between items-center p-4 max-w-7xl mx-auto">
+    <header className="fixed top-0 left-0 right-0 z-50 p-4">
+      {/* Floating glass container */}
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className={`
+          flex items-center justify-between max-w-6xl mx-auto px-6 py-4 
+          rounded-full transition-all duration-300 ease-out
+          border border-white/30 dark:border-white/10
+          shadow-xl shadow-black/10 dark:shadow-black/60
+          ${
+            isScrolled
+              ? "backdrop-blur-2xl bg-white/40 dark:bg-transparent"
+              : "backdrop-blur-xl bg-white/30 dark:bg-transparent"
+          }
+          ring-1 ring-white/40 dark:ring-white/10
+        `}
+      >
         {/* Mobile Hamburger */}
         <Button
           variant="ghost"
           size="icon"
-          className="md:hidden"
+          className="md:hidden rounded-full hover:bg-white/20 dark:hover:bg-white/10"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -73,93 +101,128 @@ export default function Header() {
         </Button>
 
         {/* Logo */}
-        <div className="md:items-end">
+        <motion.div
+          className="md:items-end"
+          whileHover={{ scale: 1.05 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
           <Link href="/">
             {mounted && <ThemeLogo className="hidden md:block" />}
           </Link>
+        </motion.div>
+
+        {/* Desktop Navigation - Centered */}
+        <div className="hidden md:flex flex-1 justify-center">
+          <NavigationMenu>
+            <div className="flex items-center space-x-8">
+              {navigation.map((item, index) => (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 + 0.3 }}
+                >
+                  <NavigationMenuLink
+                    href={item.href}
+                    className="text-sm font-roboto font-medium hover:text-primary transition-all duration-300 relative group px-3 py-2 rounded-full hover:bg-white/10 dark:hover:bg-white/5"
+                  >
+                    {item.name}
+                    <span className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-primary transition-all duration-300 origin-center group-hover:w-[calc(100%-24px)] group-hover:left-3"></span>
+                  </NavigationMenuLink>
+                </motion.div>
+              ))}
+            </div>
+          </NavigationMenu>
         </div>
 
-        {/* Desktop Navigation */}
-        <NavigationMenu className="hidden md:flex">
-          <NavigationMenuLink>
-            {navigation.map((item) => (
-              <NavigationMenuLink
-                key={item.name}
-                href={item.href}
-                className="text-sm font-roboto font-medium pr-4 hover:text-primary transition-colors relative group text-center"
-              > 
-                {item.name}
-                <span
-                  className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 origin-left ${item.className}`}
-                ></span>
-              </NavigationMenuLink>
-            ))}
-          </NavigationMenuLink>
-        </NavigationMenu>
-
         {/* Mode Toggle */}
-        <ModeToggle />
-      </nav>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.4 }}
+        >
+          <ModeToggle />
+        </motion.div>
+      </motion.nav>
 
       {/* Mobile Navigation */}
       <AnimatePresence>
         {mounted && mobileMenuOpen && (
-          <motion.div
-            initial={{ x: "-100%", opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: "-100%", opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="absolute top-full left-0 h-screen w-3/4 max-w-xs bg-background border-r z-50 md:hidden overflow-hidden"
-          >
+          <>
+            {/* Backdrop */}
             <motion.div
-              className="flex flex-col p-4 space-y-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{
-                delay: 0.1,
-                staggerChildren: 0.05,
-                delayChildren: 0.05,
-              }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+
+            {/* Mobile Menu */}
+            <motion.div
+              initial={{ x: "-100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: "-100%", opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="fixed top-4 left-4 h-[calc(100vh-2rem)] w-3/4 max-w-xs rounded-3xl backdrop-blur-xl bg-white/90 dark:bg-black/90 border border-white/20 dark:border-white/10 shadow-xl z-50 md:hidden overflow-hidden"
             >
-              {/* Logo in mobile menu */}
               <motion.div
-                className="flex justify-between items-center pb-2"
+                className="flex flex-col p-6 space-y-6 h-full"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{
-                  delay: 0.05,
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 24,
+                  delay: 0.1,
+                  staggerChildren: 0.05,
+                  delayChildren: 0.05,
                 }}
               >
-                <Link href="/">{mounted && <ThemeLogo />}</Link>
-              </motion.div>
-
-              {navigation.map((item, i) => (
-                <motion.a
-                  key={item.name}
-                  href={item.href}
-                  className={`text-sm font-roboto hover:text-primary relative group w-fit ${item.className}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                  initial={{ x: -20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
+                {/* Logo in mobile menu */}
+                <motion.div
+                  className="flex justify-between items-center pb-4 border-b border-white/10 dark:border-white/5"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{
-                    delay: 0.05 * (i + 1),
+                    delay: 0.05,
                     type: "spring",
                     stiffness: 300,
                     damping: 24,
                   }}
-                  whileHover={{ x: 5 }}
                 >
-                  <span className="relative px-1 font-medium">
-                    {item.name}
-                    <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 origin-left ${item.className}`}></span>
-                  </span>
-                </motion.a>
-              ))}
+                  <Link href="/" onClick={() => setMobileMenuOpen(false)}>
+                    {mounted && <ThemeLogo />}
+                  </Link>
+                </motion.div>
+
+                {/* Navigation Links */}
+                <div className="flex flex-col space-y-4">
+                  {navigation.map((item, i) => (
+                    <motion.a
+                      key={item.name}
+                      href={item.href}
+                      className="text-base font-roboto font-medium hover:text-primary relative group w-fit px-4 py-3 rounded-2xl hover:bg-white/10 dark:hover:bg-white/5 transition-all duration-300"
+                      onClick={() => setMobileMenuOpen(false)}
+                      initial={{ x: -20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{
+                        delay: 0.05 * (i + 2),
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 24,
+                      }}
+                      whileHover={{ x: 8, scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <span className="relative">
+                        {item.name}
+                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 origin-left group-hover:w-full"></span>
+                      </span>
+                    </motion.a>
+                  ))}
+                </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>
