@@ -1,5 +1,16 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import 'animate.css/animate.min.css';
+
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -150,4 +161,18 @@
     opacity: 0;
     transform: translateY(20px);
   }
+}
+@keyframes slide-in-left {
+  0% { transform: translateX(-100px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+@keyframes slide-in-right {
+  0% { transform: translateX(100px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+.animate-slide-in-left {
+  animation: slide-in-left 0.7s ease-in-out;
+}
+.animate-slide-in-right {
+  animation: slide-in-right 0.7s ease-in-out;
 }

@@ -25,7 +25,7 @@ const AnimatedWord = ({ word }: AnimatedWordProps) => {
         }}
         exit={{ y: 40, opacity: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="relative z-10 bg-gradient-to-r from-orange-500 to-pink-600 bg-clip-text text-transparent font-medium"
+        className="relative z-10 bg-gradient-to-r from-slate-500 to-stone-800 bg-clip-text text-transparent font-medium"
       >
         {word}
       </motion.span>
@@ -55,8 +55,8 @@ const AnimatedWord = ({ word }: AnimatedWordProps) => {
             y2="0"
             gradientUnits="userSpaceOnUse"
           >
-            <stop offset="0%" stopColor="#f59e42" />
-            <stop offset="100%" stopColor="#ec4899" />
+            <stop offset="0%" stopColor="#64748B" />
+            <stop offset="100%" stopColor="#292524" />
           </linearGradient>
         </defs>
         {/* Main sketch line */}
@@ -158,7 +158,7 @@ export default function Content() {
   }, [words]);
 
   return (
-    <main className="flex flex-col items-center justify-center pt-20 lg:pt-0">
+    <main className="flex flex-col items-center justify-center pt-20 lg:pt-0 min-h-screen max-h-fit">
       <DotBackground>
         <div className="flex flex-col items-center justify-center max-w-7xl mx-auto px-4 py-20 md:py-40 z-10">
           {/* Main heading */}
@@ -168,7 +168,7 @@ export default function Content() {
             transition={{ duration: 0.6 }}
             className="text-3xl md:text-7xl font-medium font-roboto text-center mb-4"
           >
-            I'm Lawrence, a Web Developer
+            Hi, I'm Lawrence, a web developer
           </motion.h1>
 
           {/* Animated tagline - only the rotating words animate */}
@@ -226,7 +226,7 @@ export default function Content() {
             >
               View CV
             </AnimatedButton>
-          </motion.div>
+          </motion.div>        
         </div>
       </DotBackground>
     </main>

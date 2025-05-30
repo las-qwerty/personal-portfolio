@@ -1,10 +1,13 @@
 import Header from "@/pages/Header";
-import Content from "@/pages/Content";
+import HeroSection from "@/pages/heroSection";
+import AboutMe from "@/pages/aboutMe";
+
 export default function Home() {
   return (
     <>
       <Header />
-      <Content />
+      <HeroSection />
+      <AboutMe />
     </>
   );
 }

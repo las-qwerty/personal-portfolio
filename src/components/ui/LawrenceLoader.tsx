@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import '../../app/globals.css';
 
 const letters = ['L', 'a', 'w', 'r', 'e', 'n', 'c', 'e',];
