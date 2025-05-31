@@ -1,4 +1,4 @@
-import Header from "@/pages/Header";
+import Header from "@/pages/header";
 import HeroSection from "@/pages/heroSection";
 import AboutMe from "@/pages/aboutMe";
 
