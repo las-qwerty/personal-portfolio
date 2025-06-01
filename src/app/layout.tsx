@@ -14,6 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="light" style={{colorScheme: "light"}}>
+      <head>
+        <link rel="icon" href="/lawrence-favicon.png" type="image/x-icon" />
+      </head>
       <body suppressHydrationWarning={true}>
         <ClientLayout>{children}</ClientLayout>
       </body>
