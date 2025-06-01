@@ -3,6 +3,9 @@ import React, { useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, CheckCircle, User, MessageSquare, Clock, Globe } from 'lucide-react';
 import { ArrowRightIcon } from "@radix-ui/react-icons";
+import dynamic from 'next/dynamic';
+
+const ReCAPTCHA = dynamic(() => import('react-google-recaptcha'), { ssr: false });
 
 // TypeScript types for props
 interface CardProps {
@@ -147,6 +150,7 @@ export default function ContactForm() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const containerRef = useRef(null);
 
   // Parallax effects (matching your existing pattern)
@@ -166,28 +170,48 @@ export default function ContactForm() {
     }));
   };
 
+  const handleRecaptchaChange = (token: string | null) => {
+    setRecaptchaToken(token);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    
-    // Reset form after success message
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: '',
-        projectType: ''
+
+    if (!recaptchaToken) {
+      alert('Please complete the reCAPTCHA.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, recaptchaToken }),
       });
-    }, 3000);
+      setIsSubmitting(false);
+      if (response.ok) {
+        setIsSubmitted(true);
+        setTimeout(() => {
+          setIsSubmitted(false);
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            subject: '',
+            message: '',
+            projectType: ''
+          });
+          setRecaptchaToken(null);
+        }, 3000);
+      } else {
+        alert('Failed to send message. Please try again later.');
+      }
+    } catch (error) {
+      setIsSubmitting(false);
+      alert('An error occurred. Please try again later.');
+    }
   };
 
   const contactInfo = [
@@ -200,8 +224,8 @@ export default function ContactForm() {
     {
       icon: <Mail className="w-5 h-5" />,
       label: "Email",
-      value: "lawrence@example.com",
-      href: "mailto:lawrence@example.com"
+      value: "lawrence.dev25@gmail.com",
+      href: "mailto:lawrence.dev25@gmail.com"
     },
     {
       icon: <MapPin className="w-5 h-5" />,
@@ -289,11 +313,11 @@ export default function ContactForm() {
                 user-friendly websites that drive real business results.
               </p>
               <div className="flex items-center gap-2">
-                <Badge variant="secondary" className="flex items-center gap-1">
+                <Badge variant="secondary" className="flex items-center gap-1 shadow-2xl">
                   <Globe className="w-3 h-3" />
                   Available Worldwide
                 </Badge>
-                <Badge variant="secondary">Remote Work</Badge>
+                <Badge variant="secondary" className="shadow-2xl">Remote Work</Badge>
               </div>
             </CardContent>
           </Card>
@@ -374,7 +398,7 @@ export default function ContactForm() {
           <Card>
             <CardContent>
               {!isSubmitted ? (
-                <>
+                <form onSubmit={handleSubmit}>
                   <div className="flex items-center gap-3 mb-8">
                     <div className="w-12 h-12 rounded-2xl bg-gradient-to-r from-[#6F4E37] to-[#C68642] flex items-center justify-center">
                       <MessageSquare className="w-6 h-6 text-white" />
@@ -397,6 +421,7 @@ export default function ContactForm() {
                           value={formData.name}
                           onChange={handleInputChange}
                           required
+                          className="shadow-2xl"
                         />
                       </div>
                       <div>
@@ -409,6 +434,7 @@ export default function ContactForm() {
                           value={formData.email}
                           onChange={handleInputChange}
                           required
+                          className="shadow-2xl"
                         />
                       </div>
                     </div>
@@ -423,6 +449,7 @@ export default function ContactForm() {
                           placeholder="+63 XXX XXX XXXX"
                           value={formData.phone}
                           onChange={handleInputChange}
+                          className="shadow-2xl"
                         />
                       </div>
                       <div>
@@ -432,7 +459,7 @@ export default function ContactForm() {
                           name="projectType"
                           value={formData.projectType}
                           onChange={handleInputChange}
-                          className="flex h-12 w-full rounded-2xl border border-white/20 bg-white/50 dark:bg-white/5 backdrop-blur-sm px-4 py-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6F4E37]/50 focus-visible:ring-offset-2 transition-all duration-300"
+                          className="flex h-12 w-full shadow-2xl rounded-2xl border border-white/20 bg-white/50 dark:bg-white/5 backdrop-blur-sm px-4 py-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6F4E37]/50 focus-visible:ring-offset-2 transition-all duration-300"
                         >
                           <option value="">Select project type</option>
                           <option value="wordpress">WordPress Development</option>
@@ -455,6 +482,7 @@ export default function ContactForm() {
                         value={formData.subject}
                         onChange={handleInputChange}
                         required
+                        className="shadow-2xl"
                       />
                     </div>
 
@@ -467,6 +495,14 @@ export default function ContactForm() {
                         value={formData.message}
                         onChange={handleInputChange}
                         required
+                        className="shadow-2xl"
+                      />
+                    </div>
+
+                    <div className="flex justify-center my-4">
+                      <ReCAPTCHA
+                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
+                        onChange={handleRecaptchaChange}
                       />
                     </div>
 
@@ -487,17 +523,17 @@ export default function ContactForm() {
                       )}
                     </AnimatedButton>
                   </div>
-                </>
+                </form>
               ) : (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   className="text-center py-12"
                 >
-                  <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-r from-green-400 to-green-600 flex items-center justify-center">
+                  <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-r from-[#6F4E37] to-[#C68642] flex items-center justify-center">
                     <CheckCircle className="w-10 h-10 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-green-600">Message Sent Successfully!</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-[#6F4E37]">Message Sent Successfully!</h3>
                   <p className="text-muted-foreground mb-6">
                     Thank you for reaching out! I'll review your message and get back to you within 24 hours.
                   </p>
