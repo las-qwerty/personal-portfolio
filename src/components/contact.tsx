@@ -250,6 +250,8 @@ export default function ContactForm() {
     "Website Migration"
   ];
 
+  const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '';
+
   return (
     <motion.section
       ref={containerRef}
@@ -500,10 +502,14 @@ export default function ContactForm() {
                     </div>
 
                     <div className="flex justify-start my-4">
-                      <ReCAPTCHA
-                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
-                        onChange={handleRecaptchaChange}
-                      />
+                      {recaptchaSiteKey ? (
+                        <ReCAPTCHA
+                          sitekey={recaptchaSiteKey}
+                          onChange={handleRecaptchaChange}
+                        />
+                      ) : (
+                        <div className="text-red-500 text-sm">reCAPTCHA site key is missing.</div>
+                      )}
                     </div>
 
                     <AnimatedButton
