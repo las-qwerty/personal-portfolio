@@ -1,5 +1,3 @@
-
-
 import ClientLayout from "./ClientLayout";
 import type { Metadata } from "next";
 import "./globals.css";
@@ -15,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className="light" style={{colorScheme: "light"}}>
+      <body suppressHydrationWarning={true}>
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Code, Eye, Globe, ShoppingCart, Database } from 'lucide-react';
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
+import Image from "next/image";
 
 const projects = [
     {
@@ -176,11 +177,10 @@ type Project = typeof projects[number];
 type ProjectCardProps = {
     project: Project;
     index: number;
-    isSelected: boolean;
     onSelect: (project: Project) => void;
 };
 
-const ProjectCard = ({ project, index, isSelected, onSelect }: ProjectCardProps) => {
+const ProjectCard = ({ project, index, onSelect }: ProjectCardProps) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const getCategoryIcon = (category: string) => {
@@ -216,13 +216,19 @@ const ProjectCard = ({ project, index, isSelected, onSelect }: ProjectCardProps)
 
                 {/* Project image */}
                 <div className="relative overflow-hidden h-48">
-                    <motion.img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    <motion.div
                         animate={{ scale: isHovered ? 1.05 : 1 }}
                         transition={{ duration: 0.7 }}
-                    />
+                        className="w-full h-full"
+                    >
+                        <Image
+                            src={project.image}
+                            alt={project.title}
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                    </motion.div>
 
                     {/* Overlay with actions */}
                     <motion.div
@@ -346,10 +352,12 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
                         <div className="h-full overflow-y-auto">
                             {/* Hero image */}
                             <div className="relative h-64 md:h-80">
-                                <img
+                                <Image
                                     src={project.image}
                                     alt={project.title}
-                                    className="w-full h-full object-cover"
+                                    fill
+                                    className="object-cover"
+                                    sizes="(max-width: 768px) 100vw, 75vw"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                                 <div className="absolute bottom-6 left-6">
@@ -438,7 +446,7 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
                                     {/* Contact CTA */}
                                     <div className="text-center p-6 rounded-2xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-white/20">
                                         <h4 className="text-lg font-bold mb-2">Interested in similar work?</h4>
-                                        <p className="text-muted-foreground mb-4">Let's discuss your project requirements</p>
+                                        <p className="text-muted-foreground mb-4">Let&apos;s discuss your project requirements</p>
                                         <Button className="px-6 py-3 rounded-full">
                                             Get In Touch
                                             <ArrowRight className="w-4 h-4 ml-2" />
@@ -573,7 +581,7 @@ export default function ProjectsSection() {
                         </span>
                     </h2>
                     <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                        A showcase of real projects I've built for clients, featuring WordPress development, 
+                        A showcase of real projects I&apos;ve built for clients, featuring WordPress development, 
                         e-commerce solutions, and custom web applications with measurable results.
                     </p>
                 </motion.div>
@@ -612,7 +620,6 @@ export default function ProjectsSection() {
                                 key={project.id}
                                 project={project}
                                 index={index}
-                                isSelected={selectedProject?.id === project.id}
                                 onSelect={handleProjectSelect}
                             />
                         ))}
@@ -635,7 +642,7 @@ export default function ProjectsSection() {
                     <AnimatedButton
               href="tel:09614650542"
             >
-              Let's Work Together
+              Let&apos;s Work Together
             </AnimatedButton>
                 </motion.div>
             </motion.section>

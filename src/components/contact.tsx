@@ -208,7 +208,7 @@ export default function ContactForm() {
       } else {
         alert('Failed to send message. Please try again later.');
       }
-    } catch (error) {
+    } catch {
       setIsSubmitting(false);
       alert('An error occurred. Please try again later.');
     }
@@ -275,13 +275,13 @@ export default function ContactForm() {
         className="text-center mb-16"
       >
         <h2 className="text-4xl md:text-6xl font-bold mb-6">
-          Let's{' '}
+          Let&apos;s{' '}
           <span className="bg-gradient-to-r from-[#6F4E37] to-[#C68642] bg-clip-text text-transparent">
             Work Together
           </span>
         </h2>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          Ready to bring your digital vision to life? Get in touch and let's discuss 
+          Ready to bring your digital vision to life? Get in touch and let&apos;s discuss 
           how I can help you build something amazing.
         </p>
       </motion.div>
@@ -405,7 +405,7 @@ export default function ContactForm() {
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold">Send Me a Message</h3>
-                      <p className="text-muted-foreground">I'll get back to you within 24 hours</p>
+                      <p className="text-muted-foreground">I&apos;ll get back to you within 24 hours</p>
                     </div>
                   </div>
 
@@ -535,7 +535,7 @@ export default function ContactForm() {
                   </div>
                   <h3 className="text-2xl font-bold mb-4 text-[#6F4E37]">Message Sent Successfully!</h3>
                   <p className="text-muted-foreground mb-6">
-                    Thank you for reaching out! I'll review your message and get back to you within 24 hours.
+                    Thank you for reaching out! I&apos;ll review your message and get back to you within 24 hours.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Badge variant="secondary" className="px-4 py-2">

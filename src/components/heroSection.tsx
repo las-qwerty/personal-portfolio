@@ -211,12 +211,9 @@ const ParallaxElements = () => {
 };
 
 export default function Content() {
-  const words = ["create", "build", "design", "develop"];
+  const words = useMemo(() => ["create", "build", "design", "develop"], []);
   const [currentWord, setCurrentWord] = useState(words[0]);
   const containerRef = useRef(null);
-
-  // Fixed useEffect dependency warning by wrapping 'words' in useMemo
-  const memoizedWords = useMemo(() => words, [words]);
 
   // Parallax effect for main content
   const { scrollYProgress } = useScroll({
@@ -230,14 +227,14 @@ export default function Content() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentWord((prevWord) => {
-        const currentIndex = memoizedWords.indexOf(prevWord);
-        const nextIndex = (currentIndex + 1) % memoizedWords.length;
-        return memoizedWords[nextIndex];
+        const currentIndex = words.indexOf(prevWord);
+        const nextIndex = (currentIndex + 1) % words.length;
+        return words[nextIndex];
       });
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [memoizedWords]);
+  }, [words]);
 
   return (
     <main

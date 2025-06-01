@@ -2,17 +2,17 @@
 
 import Image from "next/image";
 import AboutImage from "@/assets/about-me.png";
-import TailwindImage from "@/assets/tailwind.png";
-import Html5Image from "@/assets/html-5.png";
-import CssImage from "@/assets/css-3.png";
-import Js from "@/assets/js.png";
-import GraphQL from "@/assets/graphql.png";
-import WordPress from "@/assets/wordpress.png";
-import Shopify from "@/assets/shopify.png";
-import { useEffect, useState, ReactNode, useRef, useCallback } from "react";
+// import TailwindImage from "@/assets/tailwind.png";
+// import Html5Image from "@/assets/html-5.png";
+// import CssImage from "@/assets/css-3.png";
+// import Js from "@/assets/js.png";
+// import GraphQL from "@/assets/graphql.png";
+// import WordPress from "@/assets/wordpress.png";
+// import Shopify from "@/assets/shopify.png";
+import { useEffect, useState, ReactNode, useRef } from "react";
 import { cn } from "@/lib/utils";
 import {
-  AnimatePresence,
+  // AnimatePresence,
   motion,
   useScroll,
   useTransform,
@@ -121,9 +121,9 @@ export default function AboutMe() {
     offset: ["start end", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  // const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  // const imageY = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const textY = useTransform(scrollYProgress, [0, 1], [0, 50]);
 
   useEffect(() => {
@@ -234,11 +234,11 @@ export default function AboutMe() {
         >
           <h1 className="text-4xl font-bold text-primary">About Me</h1>
           <p className="pt-5 text-lg">
-            Hi, I'm Lawrence A-J Soriano, a passionate and self-taught Web
+            Hi, I&apos;m Lawrence A-J Soriano, a passionate and self-taught Web
             Developer specializing in WordPress and Shopify development. With
             over three years of hands-on experience, I help businesses and
             individuals bring their digital visions to life through clean,
-            responsive, and high-performing websites. Whether it's crafting
+            responsive, and high-performing websites. Whether it&apos;s crafting
             custom WordPress themes, optimizing Shopify stores, or ensuring
             every page loads fast and looks great on any device—I focus on
             delivering results that truly support your goals.

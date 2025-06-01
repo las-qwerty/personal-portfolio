@@ -13,7 +13,7 @@ export function ModeToggle({ className }: { className?: string }) {
   }
 
   return (
-    <div className="flex items-center space-x-2">
+    <div className={`flex items-center space-x-2" ${className || ""}`}>
       <Sun className="h-[1.2rem] w-[1.2rem]" />
       <Switch checked={theme === "dark"} onCheckedChange={toggleTheme} />
       <Moon className="h-[1.2rem] w-[1.2rem]" />
