@@ -1,15 +1,16 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
+    return NextResponse.json({ message: 'Method not allowed' }, { status: 405 });
   }
 
-  const { name, email, phone, subject, message, projectType, recaptchaToken } = req.body;
+  const body = await req.json();
+  const { name, email, phone, subject, message, projectType, recaptchaToken } = body;
 
   if (!name || !email || !subject || !message || !recaptchaToken) {
-    return res.status(400).json({ message: 'Missing required fields' });
+    return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
   }
 
   // Verify reCAPTCHA
@@ -22,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   });
   const recaptchaData = await recaptchaRes.json();
   if (!recaptchaData.success) {
-    return res.status(400).json({ message: 'reCAPTCHA verification failed' });
+    return NextResponse.json({ message: 'reCAPTCHA verification failed' }, { status: 400 });
   }
 
   const transporter = nodemailer.createTransport({
@@ -64,9 +65,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nProject Type: ${projectType}\nSubject: ${subject}\nMessage:\n${message}`,
       html,
     });
-    res.status(200).json({ message: 'Message sent successfully' });
-  } catch (error) {
+    return NextResponse.json({ message: 'Message sent successfully' }, { status: 200 });
+  } catch (error: any) {
     console.error('Nodemailer error:', error);
-    res.status(500).json({ message: 'Failed to send message', error: error instanceof Error ? error.message : error });
+    return NextResponse.json({ message: 'Failed to send message', error: error.message || error }, { status: 500 });
   }
 }
