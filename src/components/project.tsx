@@ -7,31 +7,32 @@ import { ArrowRight, Code, Eye, Globe, ShoppingCart, Database } from 'lucide-rea
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import Image from "next/image";
+import VwtlImage from '@/assets/vwtl-image.png';
 
 const projects = [
     {
         id: 1,
-        title: 'Charity WordPress Website',
+        title: 'E-Commerce Shopify Store',
         description:
-            'Built and designed a comprehensive charity WordPress website to increase donor engagement with seamless payment integration and immersive multimedia features.',
+            'Developed and customized a complete Shopify e-commerce website for a clothing store, focusing on user experience and conversion optimization.',
         longDescription:
-            'Developed a complete charity platform using WordPress with custom Elementor designs. Features include donation payment integration, impact story showcases with multimedia content, volunteer registration system, and event management. Optimized for mobile responsiveness and fast loading times.',
+            'Created a clean looking clothing store on Shopify with custom theme modifications, product catalog management, inventory tracking, and payment gateway integration. Implemented responsive design principles and optimized for mobile shopping experience.',
         image:
-            'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&h=600&fit=crop',
-        tags: ['WordPress', 'Elementor', 'CSS', 'Payment Integration', 'Divi'],
-        category: 'WordPress',
+            VwtlImage,
+        tags: ['Shopify', 'Liquid', 'CSS', 'JavaScript', 'Payment Integration', 'Responsive Design'],
+        category: 'E-Commerce',
         year: '2024',
-        client: 'PNG Charity Organization',
+        client: 'Vibe With The Legends',
         featured: true,
         stats: {
-            engagement: '+85%',
-            donations: '+120%',
-            speed: '2.8s',
+            dailysessions: '350+',
+            mobile: '95%',
+            speed: '3.3s',
         },
         highlights: [
-            'Seamless payment integration',
-            'Immersive multimedia features',
-            'Mobile-optimized design'
+            'Custom Shopify theme',
+            'Mobile-first approach',
+            'Payment gateway integration'
         ]
     },
     {
@@ -208,7 +209,7 @@ const ProjectCard = ({ project, index, onSelect }: ProjectCardProps) => {
                 {/* Featured badge */}
                 {project.featured && (
                     <div className="absolute top-4 left-4 z-20">
-                        <Badge className="bg-gradient-to-r from-[#6F4E37] to-[#C68642] text-white border-0">
+                        <Badge className="bg-gradient-to-r from-[#6F4E37] to-[#C68642] text-white border-0  rounded-full">
                             Featured
                         </Badge>
                     </div>
@@ -253,7 +254,7 @@ const ProjectCard = ({ project, index, onSelect }: ProjectCardProps) => {
                 {/* Project info */}
                 <div className="p-6 flex-1 flex flex-col">
                     <div className="flex items-center justify-between mb-3">
-                        <Badge variant="secondary" className="text-xs flex items-center gap-1">
+                        <Badge variant="secondary" className="text-xs flex items-center rounded-full">
                             {getCategoryIcon(project.category)}
                             {project.category}
                         </Badge>
@@ -271,9 +272,9 @@ const ProjectCard = ({ project, index, onSelect }: ProjectCardProps) => {
                     </p>
 
                     {/* Tech stack */}
-                    <div className="flex flex-wrap gap-2 mb-4 min-h-[60px]">
+                    <div className="flex flex-wrap gap-2 mb-4">
                         {project.tags.slice(0, 3).map((tag: string) => (
-                            <Badge key={tag} variant="outline" className="text-xs">
+                            <Badge key={tag} variant="outline" className="text-xs rounded-full">
                                 {tag}
                             </Badge>
                         ))}
@@ -411,7 +412,7 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
                                                 <Badge
                                                     key={tag}
                                                     variant="secondary"
-                                                    className="text-sm px-4 py-2"
+                                                    className="text-sm px-4 py-2 rounded-full bg-white dark:bg-white/10 backdrop-blur-sm border border-white/20 dark:text-white/80 hover:bg-white/30 dark:hover:bg-white/20 transition-colors"
                                                 >
                                                     {tag}
                                                 </Badge>
@@ -444,7 +445,7 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
                                     </div>
 
                                     {/* Contact CTA */}
-                                    <div className="text-center p-6 rounded-2xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-white/20">
+                                    <div className="text-center p-6 rounded-2xl bg-white dark:bg-black shadow-2xl border border-white/20">
                                         <h4 className="text-lg font-bold mb-2">Interested in similar work?</h4>
                                         <p className="text-muted-foreground mb-4">Let&apos;s discuss your project requirements</p>
                                         <Button className="px-6 py-3 rounded-full">
@@ -556,6 +557,7 @@ export default function ProjectsSection() {
                 ref={containerRef}
                 style={{ opacity }}
                 className="max-w-7xl mx-auto px-4 py-20 md:py-32 relative overflow-hidden"
+                id="projects"
             >
                 {/* Background elements */}
                 <motion.div

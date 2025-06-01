@@ -50,9 +50,9 @@ export default function Header() {
 
   const navigation = [
     { name: "Home", href: "/", className: "group-hover:w-[100%]" },
-    { name: "About", href: "/about", className: "group-hover:w-[100%]" },
-    { name: "Projects", href: "/projects", className: "group-hover:w-[100%]" },
-    { name: "Contact", href: "/contact", className: "group-hover:w-[100%]" },
+    { name: "About", href: "#about", className: "group-hover:w-[100%]" },
+    { name: "Projects", href: "#projects", className: "group-hover:w-[100%]" },
+    { name: "Contact", href: "#contact", className: "group-hover:w-[100%]" },
   ];
 
   return (

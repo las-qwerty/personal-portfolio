@@ -3,6 +3,10 @@
 @import 'animate.css/animate.min.css';
 @import url('https://fonts.googleapis.com/css2?family=Morgan:wght@400;700&family=Montserrat:wght@400;700&family=Poppins:wght@400;700&display=swap');
 
+html {
+  scroll-behavior: smooth;
+}
+
 @keyframes marquee-left {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }

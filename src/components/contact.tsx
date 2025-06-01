@@ -254,6 +254,7 @@ export default function ContactForm() {
 
   return (
     <motion.section
+      id="contact"
       ref={containerRef}
       style={{ opacity }}
       className="max-w-7xl mx-auto px-4 py-20 md:py-32 relative overflow-hidden"

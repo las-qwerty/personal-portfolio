@@ -146,6 +146,7 @@ export default function AboutMe() {
 
   return (
     <div
+      id="about"
       ref={containerRef}
       className="about-me max-w-7xl mx-auto min-h-auto pt-20 pb-20 relative overflow-hidden md:pt-32 md:pb-32"
     >
