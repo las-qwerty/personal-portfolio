@@ -1,7 +1,12 @@
 "use client";
 
-import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
-import { useState, useEffect, ReactNode, useRef } from "react";
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { useState, useEffect, ReactNode, useRef, useMemo } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
@@ -144,7 +149,7 @@ const ParallaxElements = () => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"]
+    offset: ["start end", "end start"],
   });
 
   // Different parallax speeds for various elements
@@ -155,28 +160,31 @@ const ParallaxElements = () => {
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.2, 0.8]);
 
   return (
-    <div ref={ref} className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div
+      ref={ref}
+      className="absolute inset-0 overflow-hidden pointer-events-none"
+    >
       {/* Floating geometric shapes with parallax */}
       <motion.div
         style={{ y: y1 }}
         className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-[#6F4E37] to-[#C68642] rounded-full blur-sm"
       />
-      
+
       <motion.div
         style={{ y: y2, rotate }}
         className="absolute top-40 right-20 w-16 h-16 bg-gradient-to-br from-[#6F4E37]/20 to-[#C68642]/20 rounded-lg"
       />
-      
+
       <motion.div
         style={{ y: y3, scale }}
         className="absolute bottom-32 left-20 w-12 h-12 bg-gradient-to-br from-[#6F4E37]/20 to-[#C68642]/20 rounded-full"
       />
-      
+
       <motion.div
         style={{ y: y1 }}
         className="absolute top-60 right-10 w-8 h-24 bg-gradient-to-b from-[#6F4E37]/20 to-[#C68642]/20 rounded-full blur-sm"
       />
-      
+
       {/* Floating code symbols */}
       <motion.div
         style={{ y: y2 }}
@@ -184,14 +192,14 @@ const ParallaxElements = () => {
       >
         {"{"}
       </motion.div>
-      
+
       <motion.div
         style={{ y: y1 }}
         className="absolute bottom-40 left-1/4 text-4xl text-primary/15 font-mono select-none"
       >
         &lt;/&gt;
       </motion.div>
-      
+
       <motion.div
         style={{ y: y3 }}
         className="absolute top-1/2 left-10 text-5xl text-primary/12 font-mono select-none"
@@ -206,34 +214,40 @@ export default function Content() {
   const words = ["create", "build", "design", "develop"];
   const [currentWord, setCurrentWord] = useState(words[0]);
   const containerRef = useRef(null);
-  
+
+  // Fixed useEffect dependency warning by wrapping 'words' in useMemo
+  const memoizedWords = useMemo(() => words, [words]);
+
   // Parallax effect for main content
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"]
+    offset: ["start start", "end start"],
   });
-  
+
   const y = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentWord((prevWord) => {
-        const currentIndex = words.indexOf(prevWord);
-        const nextIndex = (currentIndex + 1) % words.length;
-        return words[nextIndex];
+        const currentIndex = memoizedWords.indexOf(prevWord);
+        const nextIndex = (currentIndex + 1) % memoizedWords.length;
+        return memoizedWords[nextIndex];
       });
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [words]);
+  }, [memoizedWords]);
 
   return (
-    <main ref={containerRef} className="flex flex-col items-center justify-center pt-20 lg:pt-0 min-h-screen max-h-fit relative">
+    <main
+      ref={containerRef}
+      className="flex flex-col items-center justify-center pt-20 lg:pt-0 min-h-screen max-h-fit relative"
+    >
       <DotBackground>
         <ParallaxElements />
-        
-        <motion.div 
+
+        <motion.div
           style={{ y, opacity }}
           className="flex flex-col items-center justify-center max-w-7xl mx-auto px-4 py-20 md:py-40 z-10 relative"
         >
@@ -244,13 +258,13 @@ export default function Content() {
             transition={{ duration: 0.6 }}
             className="text-3xl md:text-7xl font-medium font-roboto text-center mb-4 relative z-10"
           >
-            Hi, I'm Lawrence, a web developer
+            Hi, I&apos;m Lawrence, a web developer
           </motion.h1>
 
           {/* Animated tagline */}
           <div className="text-3xl md:text-7xl font-medium font-roboto h-16 md:h-20 text-center mb-8 relative z-10">
             <p className="leading-tight">
-              Let's{" "}
+              Let&apos;s{" "}
               <AnimatePresence mode="wait">
                 <AnimatedWord key={currentWord} word={currentWord} />
               </AnimatePresence>{" "}
@@ -303,7 +317,7 @@ export default function Content() {
             >
               View CV
             </AnimatedButton>
-          </motion.div>        
+          </motion.div>
         </motion.div>
       </DotBackground>
     </main>
