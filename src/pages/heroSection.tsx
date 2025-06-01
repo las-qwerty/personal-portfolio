@@ -159,22 +159,22 @@ const ParallaxElements = () => {
       {/* Floating geometric shapes with parallax */}
       <motion.div
         style={{ y: y1 }}
-        className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-sm"
+        className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-[#6F4E37] to-[#C68642] rounded-full blur-sm"
       />
       
       <motion.div
         style={{ y: y2, rotate }}
-        className="absolute top-40 right-20 w-16 h-16 bg-gradient-to-br from-pink-400/30 to-red-600/30 rounded-lg"
+        className="absolute top-40 right-20 w-16 h-16 bg-gradient-to-br from-[#6F4E37]/20 to-[#C68642]/20 rounded-lg"
       />
       
       <motion.div
         style={{ y: y3, scale }}
-        className="absolute bottom-32 left-20 w-12 h-12 bg-gradient-to-br from-green-400/25 to-teal-600/25 rounded-full"
+        className="absolute bottom-32 left-20 w-12 h-12 bg-gradient-to-br from-[#6F4E37]/20 to-[#C68642]/20 rounded-full"
       />
       
       <motion.div
         style={{ y: y1 }}
-        className="absolute top-60 right-10 w-8 h-24 bg-gradient-to-b from-yellow-400/20 to-orange-600/20 rounded-full blur-sm"
+        className="absolute top-60 right-10 w-8 h-24 bg-gradient-to-b from-[#6F4E37]/20 to-[#C68642]/20 rounded-full blur-sm"
       />
       
       {/* Floating code symbols */}

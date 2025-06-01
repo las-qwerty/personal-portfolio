@@ -47,7 +47,10 @@ const BADGES = [
   "Web Flow",
   "Github",
   "Gitlab",
-  "Postman"
+  "Postman",
+  "Chat GPT",
+  "Claude AI",
+  "Deep Seek",
 ];
 
 // Animated button component
