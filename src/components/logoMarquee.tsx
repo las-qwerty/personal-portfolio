@@ -50,7 +50,7 @@ export function LogoMarquee({
 
   return (
     <TooltipProvider>
-      <Card className={cn("overflow-hidden bg-transparent border-none", className)}>
+      <Card className={cn("overflow-hidden bg-transparent border-none shadow-lg dark:bg-white", className)}>
         <CardContent className="py-8 px-0">
           <div 
             ref={containerRef}
