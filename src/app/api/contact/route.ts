@@ -66,8 +66,9 @@ export async function POST(req: NextRequest) {
       html,
     });
     return NextResponse.json({ message: 'Message sent successfully' }, { status: 200 });
-  } catch (error: any) {
+  } catch (error) {
     console.error('Nodemailer error:', error);
-    return NextResponse.json({ message: 'Failed to send message', error: error.message || error }, { status: 500 });
+    const errMsg = error instanceof Error ? error.message : String(error);
+    return NextResponse.json({ message: 'Failed to send message', error: errMsg }, { status: 500 });
   }
 }
