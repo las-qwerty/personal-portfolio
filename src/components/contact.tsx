@@ -203,7 +203,7 @@ export default function ContactForm() {
             projectType: "",
           });
           setRecaptchaToken(null);
-        }, 3000);
+        }, 10000);
       } else {
         alert("Failed to send message. Please try again later.");
       }
@@ -238,15 +238,6 @@ export default function ContactForm() {
       value: "Within 24 hours",
       href: null,
     },
-  ];
-
-  const services = [
-    "WordPress Development",
-    "Shopify E-commerce",
-    "Custom Web Applications",
-    "Website Optimization",
-    "API Integration",
-    "Website Migration",
   ];
 
   const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
@@ -340,24 +331,6 @@ export default function ContactForm() {
                         </div>
                       </div>
                     )}
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Services */}
-          <Card>
-            <CardContent>
-              <h3 className="text-xl font-bold mb-6">Services I Offer</h3>
-              <div className="grid grid-cols-1 gap-3">
-                {services.map((service, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-3 p-3 rounded-xl bg-white/30 dark:bg-white/5 backdrop-blur-sm border border-white/20"
-                  >
-                    <div className="w-2 h-2 bg-gradient-to-r from-[#6F4E37] to-[#C68642] rounded-full" />
-                    <span className="text-sm font-medium">{service}</span>
                   </div>
                 ))}
               </div>
@@ -515,10 +488,10 @@ export default function ContactForm() {
                     Thank you for reaching out! I&apos;ll review your message and get back to you within 24 hours.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Badge variant="secondary" className="px-4 py-2">
+                    <Badge variant="secondary" className="px-4 py-2 shadow-2xl">
                       Response within 24 hours
                     </Badge>
-                    <Badge variant="secondary" className="px-4 py-2">
+                    <Badge variant="secondary" className="px-4 py-2 shadow-2xl">
                       Project discussion available
                     </Badge>
                   </div>
