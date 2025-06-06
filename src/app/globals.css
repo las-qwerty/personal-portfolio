@@ -188,7 +188,6 @@ html {
 .lawrence-letter {
   font-size: 2.5rem;
   font-weight: bold;
-  color: var(--primary);
   opacity: 0;
   animation: lawrence-fadein 0.7s forwards;
 }
