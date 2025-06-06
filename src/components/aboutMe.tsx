@@ -233,7 +233,12 @@ export default function AboutMe() {
               : "opacity-0 translate-y-10"
           )}
         >
-          <h1 className="text-4xl font-bold text-primary">About Me</h1>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+                        About{' '}
+                        <span className="bg-gradient-to-r from-[#6F4E37] to-[#C68642] bg-clip-text text-transparent">
+                            Me
+                        </span>
+                    </h2>
           <p className="pt-5 text-lg">
             Hi, I&apos;m Lawrence A-J Soriano, a passionate and self-taught Web
             Developer specializing in WordPress and Shopify development. With

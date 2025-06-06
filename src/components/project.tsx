@@ -3,7 +3,7 @@ import React, { useState, useRef, ReactNode } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Code, Eye, Globe, ShoppingCart, Database } from 'lucide-react';
+import { ArrowRight, Code, Eye, Globe, ShoppingCart } from 'lucide-react';
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import Image from "next/image";
