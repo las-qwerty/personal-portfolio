@@ -8,6 +8,7 @@ import { ArrowRightIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import Image from "next/image";
 import VwtlImage from '@/assets/vwtl-image.png';
+import GenCool from '@/assets/gencool.png';
 
 const projects = [
     {
@@ -20,7 +21,7 @@ const projects = [
         image:
             VwtlImage,
         tags: ['Shopify', 'Liquid', 'CSS', 'JavaScript', 'Payment Integration', 'Responsive Design'],
-        category: 'E-Commerce',
+        category: 'Shopify',
         year: '2024',
         client: 'Vibe With The Legends',
         featured: true,
@@ -37,17 +38,17 @@ const projects = [
     },
     {
         id: 2,
-        title: 'E-Commerce Shopify Store',
+        title: 'Business Portfolio',
         description:
-            'Developed and customized a complete Shopify e-commerce website for a clothing store, focusing on user experience and conversion optimization.',
+            'Designed, developed, and fully customized a high-performance WordPress website for a leading business corporation, tailored to showcase their portfolio, services, and achievements.',
         longDescription:
             'Created a modern clothing store on Shopify with custom theme modifications, product catalog management, inventory tracking, and payment gateway integration. Implemented responsive design principles and optimized for mobile shopping experience.',
         image:
-            'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop',
-        tags: ['Shopify', 'CSS', 'JavaScript', 'E-commerce', 'Responsive Design'],
-        category: 'E-Commerce',
+            GenCool,
+        tags: ['WordPress', 'PHP', 'CSS','JavaScript', 'Responsive Design'],
+        category: 'WordPress',
         year: '2024',
-        client: 'Fashion Retailer',
+        client: 'Gencool HVAC Mechanical',
         featured: true,
         stats: {
             conversion: '+65%',
@@ -55,109 +56,8 @@ const projects = [
             sales: '+140%',
         },
         highlights: [
-            'Custom Shopify theme',
+            'Custom WordPress theme',
             'Mobile-first approach',
-            'Payment gateway integration'
-        ]
-    },
-    {
-        id: 3,
-        title: 'Business WordPress Website',
-        description:
-            'Built a professional business website from scratch using WordPress and Elementor, featuring custom CSS styling and brand-focused design.',
-        longDescription:
-            'Developed a comprehensive business website with custom WordPress theme, professional layout design, service showcases, contact forms, and SEO optimization. Integrated Google Analytics, Search Console, and Business Profile for enhanced online presence.',
-        image:
-            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop',
-        tags: ['WordPress', 'Elementor', 'Custom CSS', 'SEO', 'Google Analytics'],
-        category: 'Business',
-        year: '2023',
-        client: 'Professional Services',
-        featured: false,
-        stats: {
-            seo: '92/100',
-            traffic: '+180%',
-            leads: '+75%',
-        },
-        highlights: [
-            'Built from scratch',
-            'SEO optimized',
-            'Google integrations'
-        ]
-    },
-    {
-        id: 4,
-        title: 'CRUD Data Management System',
-        description:
-            'Developed a full CRUD (Create, Read, Update, Delete) system for efficient data management with modern web technologies.',
-        longDescription:
-            'Built a comprehensive data management system with full CRUD operations, user authentication, data validation, and responsive interface. Implemented using modern JavaScript frameworks with focus on user experience and data security.',
-        image:
-            'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
-        tags: ['JavaScript', 'CRUD', 'Database', 'Spring Boot', 'API'],
-        category: 'Web App',
-        year: '2023',
-        client: 'Data Management',
-        featured: false,
-        stats: {
-            efficiency: '+90%',
-            accuracy: '99.2%',
-            speed: '1.5s',
-        },
-        highlights: [
-            'Full CRUD operations',
-            'Data validation',
-            'Security focused'
-        ]
-    },
-    {
-        id: 5,
-        title: 'GraphQL API Integration',
-        description:
-            'Integrated GraphQL API for smoother data handling and improved application performance with efficient data fetching.',
-        longDescription:
-            'Implemented GraphQL API integration to optimize data fetching and improve application performance. Features include query optimization, real-time data updates, and reduced network overhead for better user experience.',
-        image:
-            'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop',
-        tags: ['GraphQL', 'API', 'JavaScript', 'Postman', 'Performance'],
-        category: 'API',
-        year: '2023',
-        client: 'Web Application',
-        featured: true,
-        stats: {
-            performance: '+45%',
-            requests: '-60%',
-            loading: '40% faster',
-        },
-        highlights: [
-            'Optimized data fetching',
-            'Real-time updates',
-            'Reduced network overhead'
-        ]
-    },
-    {
-        id: 6,
-        title: 'Website Migration & Optimization',
-        description:
-            'Handled domain and email migrations, technical issue fixes, and comprehensive website optimization for improved performance.',
-        longDescription:
-            'Provided comprehensive website maintenance including domain migrations, email setup, technical troubleshooting, and performance optimization. Implemented Google Tag Manager, Analytics, and Search Console for better tracking and SEO.',
-        image:
-            'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
-        tags: ['Migration', 'Optimization', 'Google Analytics', 'GTM', 'SEO'],
-        category: 'Maintenance',
-        year: '2024',
-        client: 'Multiple Clients',
-        featured: false,
-        stats: {
-            uptime: '99.9%',
-            speed: '+70%',
-            seo: '+50%',
-        },
-        highlights: [
-            'Zero downtime migration',
-            'Performance optimization',
-            'Google integrations'
         ]
     },
 ];
@@ -165,11 +65,7 @@ const projects = [
 const categories = [
     'All',
     'WordPress',
-    'E-Commerce', 
-    'Business',
-    'Web App',
-    'API',
-    'Maintenance'
+    'Shopify',
 ];
 
 // Enhanced project card component
@@ -187,8 +83,7 @@ const ProjectCard = ({ project, index, onSelect }: ProjectCardProps) => {
     const getCategoryIcon = (category: string) => {
         switch (category) {
             case 'WordPress': return <Globe className="w-4 h-4" />;
-            case 'E-Commerce': return <ShoppingCart className="w-4 h-4" />;
-            case 'API': return <Database className="w-4 h-4" />;
+            case 'Shopify': return <ShoppingCart className="w-4 h-4" />;
             default: return <Code className="w-4 h-4" />;
         }
     };
