@@ -529,7 +529,7 @@ export default function ProjectsSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="text-center mt-16 p-8 rounded-3xl bg-white/20 dark:bg-white/5 backdrop-blur-xl border border-white/20"
+                    className="text-center mt-16 p-0 md:p-8 rounded-3xl bg-white/20 dark:bg-white/5 backdrop-blur-xl border border-white/20"
                 >
                     <h3 className="text-2xl font-bold mb-4">3+ Years of Experience</h3>
                     <p className="mb-6 text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -537,7 +537,7 @@ export default function ProjectsSection() {
                         Focused on delivering user-friendly, responsive websites that drive real business results.
                     </p>
                     <AnimatedButton
-              href="tel:09614650542"
+              href="#contact"
             >
               Let&apos;s Work Together
             </AnimatedButton>
