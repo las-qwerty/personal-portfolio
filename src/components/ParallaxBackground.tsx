@@ -35,7 +35,7 @@ export const ParallaxBackground: React.FC<ParallaxBackgroundProps> = ({
           backgroundPosition: `center ${offset}px`,
           backgroundSize: "cover",
           transition: "background-position 0.2s cubic-bezier(0.4,0,0.2,1)",
-          opacity: 0.7,
+          opacity: 0.5,
         }}
         aria-hidden="true"
       />
