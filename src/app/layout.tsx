@@ -1,4 +1,5 @@
 import ClientLayout from "./ClientLayout";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -19,6 +20,7 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning={true}>
         <ClientLayout>{children}</ClientLayout>
+        <SpeedInsights />
       </body>
     </html>
   );
