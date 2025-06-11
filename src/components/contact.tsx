@@ -161,10 +161,17 @@ export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const [phoneError, setPhoneError] = useState("");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    // Only allow numbers for phone input
+    if (name === "phone") {
+      const numericValue = value.replace(/[^\d]/g, "");
+      setFormData(prev => ({ ...prev, [name]: numericValue }));
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleRecaptchaChange = (token: string | null) => {
@@ -174,6 +181,15 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    // Phone number validation: only allow numbers if not empty
+    if (formData.phone && !/^\d+$/.test(formData.phone)) {
+      setPhoneError("Phone number must contain only numbers.");
+      setIsSubmitting(false);
+      return;
+    } else {
+      setPhoneError("");
+    }
 
     if (!recaptchaToken) {
       alert("Please complete the reCAPTCHA.");
@@ -396,6 +412,9 @@ export default function ContactForm() {
                           onChange={handleInputChange}
                           className="shadow-2xl"
                         />
+                        {phoneError && (
+                          <p className="text-red-500 text-xs mt-1">{phoneError}</p>
+                        )}
                       </div>
                       <div>
                         <Label htmlFor="projectType">Project Type</Label>
