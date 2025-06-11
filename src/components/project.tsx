@@ -507,8 +507,7 @@ export default function ProjectsSection() {
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             A showcase of real projects I&apos;ve built for clients, featuring
-            WordPress development, e-commerce solutions, and custom web
-            applications with measurable results.
+            WordPress development and Shopify.
           </p>
         </motion.div>
 
