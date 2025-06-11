@@ -146,13 +146,13 @@ const AnimatedButton = ({
 
 // Parallax floating elements component
 const ParallaxElements = () => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  // Different parallax speeds for various elements
+  // Parallax speeds for various elements
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -50]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const y3 = useTransform(scrollYProgress, [0, 1], [0, 50]);
@@ -160,10 +160,7 @@ const ParallaxElements = () => {
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.2, 0.8]);
 
   return (
-    <div
-      ref={ref}
-      className="absolute inset-0 overflow-hidden pointer-events-none"
-    >
+    <div ref={ref} className="absolute inset-0 overflow-hidden pointer-events-none">
       {/* Floating geometric shapes with parallax */}
       <motion.div
         style={{ y: y1 }}

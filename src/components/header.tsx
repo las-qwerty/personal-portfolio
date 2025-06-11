@@ -9,25 +9,27 @@ import {
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import Logo from "@/assets/logo.png";
-import LogoWhite from "@/assets/logo-white.png";
-import Link from "next/link";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 const ThemeLogo = ({ className = "" }) => {
   const { resolvedTheme } = useTheme();
-  const logoSrc = resolvedTheme === "dark" ? LogoWhite : Logo;
+  const isDark = resolvedTheme === "dark";
 
   return (
-    <Image
-      src={logoSrc}
-      alt="logo"
-      width={40}
-      height={40}
-      className={className}
-      priority
-    />
+    <Link href="/" aria-label="Home">
+      <span
+        className={`font-bold text-3xl select-none ${className}`}
+        style={{
+          color: isDark ? "#fff" : "#000",
+          fontFamily: "Roboto, sans-serif",
+          letterSpacing: "-0.05em",
+        }}
+        aria-label="Logo"
+      >
+        L
+      </span>
+    </Link>
   );
 };
 

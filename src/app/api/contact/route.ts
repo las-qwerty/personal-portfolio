@@ -3,8 +3,17 @@ import nodemailer from 'nodemailer';
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { name, email, phone, subject, message, projectType, recaptchaToken } = body;
+  const {
+    name,
+    email,
+    phone,
+    subject,
+    message,
+    projectType,
+    recaptchaToken,
+  } = body;
 
+  // Validate required fields
   if (!name || !email || !subject || !message || !recaptchaToken) {
     return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
   }
@@ -14,6 +23,7 @@ export async function POST(req: NextRequest) {
   if (!recaptchaSecret) {
     return NextResponse.json({ message: 'reCAPTCHA secret key is not set on the server.' }, { status: 500 });
   }
+
   const recaptchaVerifyUrl = 'https://www.google.com/recaptcha/api/siteverify';
   const recaptchaRes = await fetch(recaptchaVerifyUrl, {
     method: 'POST',
@@ -25,6 +35,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: 'reCAPTCHA verification failed' }, { status: 400 });
   }
 
+  // Configure nodemailer transporter
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -34,6 +45,7 @@ export async function POST(req: NextRequest) {
   });
 
   try {
+    // Email HTML template
     const html = `
       <div style="font-family: 'Inter', Arial, sans-serif; background: #f9fafb; padding: 32px;">
         <div style="max-width: 600px; margin: auto; background: #fff; border-radius: 1rem; box-shadow: 0 2px 8px #0001; padding: 32px; border: 1px solid #e5e7eb;">
@@ -64,6 +76,7 @@ export async function POST(req: NextRequest) {
       text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nProject Type: ${projectType}\nSubject: ${subject}\nMessage:\n${message}`,
       html,
     });
+
     return NextResponse.json({ message: 'Message sent successfully' }, { status: 200 });
   } catch (error) {
     console.error('Nodemailer error:', error);

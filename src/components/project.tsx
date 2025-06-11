@@ -227,7 +227,8 @@ type ProjectModalProps = {
   onClose: () => void;
 };
 
-// Human-readable labels for project stats
+
+// Use for spaces
 const statLabels: Record<string, string> = {
   dailysessions: "Daily Sessions",
   mobile: "Mobile Users",
