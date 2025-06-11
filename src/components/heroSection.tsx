@@ -303,7 +303,7 @@ export default function Content() {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="flex flex-row justify-center gap-4 relative z-10"
           >
-            <AnimatedButton href="tel:09614650542">Contact Me</AnimatedButton>
+            <AnimatedButton href="#contact">Contact Me</AnimatedButton>
             <AnimatedButton
               href="/Lawrence-A-J-Soriano-CV.pdf"
               isExternal
