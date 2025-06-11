@@ -169,6 +169,25 @@ export default function Header() {
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="fixed top-4 left-4 h-[calc(100vh-2rem)] w-3/4 max-w-xs rounded-3xl backdrop-blur-xl bg-white/90 dark:bg-black/90 border border-white/20 dark:border-white/10 shadow-xl z-50 md:hidden overflow-hidden"
             >
+              {/* Close Button*/}
+              <button
+                className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/20 dark:hover:bg-white/10 focus:outline-none"
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Close menu"
+                type="button"
+              >
+                <motion.span
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  whileTap={{ rotate: 180, scale: 0.9 }}
+                  whileHover={{ scale: 1.1 }}
+                  style={{ display: "inline-block" }}
+                >
+                  <X className="h-6 w-6" />
+                </motion.span>
+              </button>
               <motion.div
                 className="flex flex-col p-6 space-y-6 h-full"
                 initial={{ opacity: 0 }}
