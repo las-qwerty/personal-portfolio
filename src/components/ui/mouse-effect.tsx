@@ -24,11 +24,11 @@ export default function MouseEffect() {
 
     return (
         <>
-            <div className="ball bg-black dark:bg-white w-4 h-4 fixed top-0 left-0 rounded-full pointer-events-none"></div>
-            <div className="ball bg-black dark:bg-white w-4 h-4 fixed top-0 left-0 rounded-full pointer-events-none"></div>
-            <div className="ball bg-black dark:bg-white w-4 h-4 fixed top-0 left-0 rounded-full pointer-events-none"></div>
-            <div className="ball bg-black dark:bg-white w-4 h-4 fixed top-0 left-0 rounded-full pointer-events-none"></div>
-            <div className="ball bg-black dark:bg-white w-4 h-4 fixed top-0 left-0 rounded-full pointer-events-none"></div>
+            <div className="ball bg-black dark:bg-white w-4 h-4 fixed top-0 left-0 rounded-full pointer-events-none hidden md:block"></div>
+            <div className="ball bg-black dark:bg-white w-4 h-4 fixed top-0 left-0 rounded-full pointer-events-none hidden md:block"></div>
+            <div className="ball bg-black dark:bg-white w-4 h-4 fixed top-0 left-0 rounded-full pointer-events-none hidden md:block"></div>
+            <div className="ball bg-black dark:bg-white w-4 h-4 fixed top-0 left-0 rounded-full pointer-events-none hidden md:block"></div>
+            <div className="ball bg-black dark:bg-white w-4 h-4 fixed top-0 left-0 rounded-full pointer-events-none hidden md:block"></div>
         </>
     );
 }
