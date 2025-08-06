@@ -305,7 +305,7 @@ export default function Content() {
           >
             <AnimatedButton href="#contact">Contact Me</AnimatedButton>
             <AnimatedButton
-              href="/Lawrence-A-J-Soriano-CV.pdf"
+              href="/Lawrence Soriano - CV.pdf"
               isExternal
               variant="inverse"
             >
