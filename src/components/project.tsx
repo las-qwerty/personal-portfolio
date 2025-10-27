@@ -525,7 +525,7 @@ export default function ProjectsSection() {
               onClick={() => setActiveCategory(category)}
               className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 shadow-2xl ${
                 activeCategory === category
-                  ? "bg-gradient-to-r from-[#6F4E37] to-[#C68642] text-white shadow-lg"
+                  ? "bg-black text-white shadow-lg"
                   : "bg-white/40 hover:bg-white/60 dark:bg-white/5 dark:hover:bg-white/10 backdrop-blur-sm border border-white/20"
               }`}
             >
