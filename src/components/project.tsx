@@ -370,7 +370,7 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
                     </p>
                     <Link href="#contact" className="inline-block">
                       <Button
-                        className="px-6 py-3 rounded-full"
+                        className="px-6 py-3 rounded-full bg-black text-white"
                         onClick={onClose}
                       >
                         Get In Touch

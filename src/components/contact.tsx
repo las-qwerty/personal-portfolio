@@ -293,7 +293,7 @@ export default function ContactForm() {
           <Card>
             <CardContent>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-r from-[#6F4E37] to-[#C68642] flex items-center justify-center">
+                <div className="w-12 h-12 rounded-2xl bg-black dark:bg-gradient-to-r from-[#6F4E37] to-[#C68642] flex items-center justify-center">
                   <User className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -328,7 +328,7 @@ export default function ContactForm() {
                         href={item.href}
                         className="flex items-center gap-4 p-3 rounded-2xl bg-white/30 dark:bg-white/5 backdrop-blur-sm border border-white/20 hover:bg-white/50 dark:hover:bg-white/10 transition-all duration-300 group"
                       >
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-[#6F4E37] to-[#C68642] flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                        <div className="w-10 h-10 rounded-xl bg-black dark:bg-gradient-to-r from-[#6F4E37] to-[#C68642] flex items-center justify-center text-white group-hover:scale-110 transition-transform">
                           {item.icon}
                         </div>
                         <div>
@@ -338,7 +338,7 @@ export default function ContactForm() {
                       </a>
                     ) : (
                       <div className="flex items-center gap-4 p-3 rounded-2xl bg-white/30 dark:bg-white/5 backdrop-blur-sm border border-white/20">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-[#6F4E37] to-[#C68642] flex items-center justify-center text-white">
+                        <div className="w-10 h-10 rounded-xl bg-black dark:bg-gradient-to-r from-[#6F4E37] to-[#C68642] flex items-center justify-center text-white">
                           {item.icon}
                         </div>
                         <div>
@@ -361,7 +361,7 @@ export default function ContactForm() {
               {!isSubmitted ? (
                 <form onSubmit={handleSubmit}>
                   <div className="flex items-center gap-3 mb-8">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-r from-[#6F4E37] to-[#C68642] flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-2xl bg-black dark:bg-gradient-to-r from-[#6F4E37] to-[#C68642] flex items-center justify-center">
                       <MessageSquare className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -425,7 +425,7 @@ export default function ContactForm() {
                           onChange={handleInputChange}
                           className="flex h-12 w-full shadow-2xl rounded-2xl border border-white/20 bg-white/50 dark:bg-white/5 backdrop-blur-sm px-4 py-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6F4E37]/50 focus-visible:ring-offset-2 transition-all duration-300"
                         >
-                          <option value="">Select project type</option>
+                          <option value="" disabled>Select project type</option>
                           <option value="wordpress">WordPress Development</option>
                           <option value="shopify">Shopify E-commerce</option>
                           <option value="webapp">Custom Web App</option>
