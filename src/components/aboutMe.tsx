@@ -22,7 +22,6 @@ import Link from "next/link";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { Badge } from "@/components/ui/badge";
 
-
 // for future use, if I want to display logos in a marquee or grid
 // const LOGOS = [
 //   { src: WordPress.src, alt: "WordPress" },
@@ -158,7 +157,7 @@ export default function AboutMe() {
             "w-full md:w-1/2 flex justify-center items-center transition-all duration-700 relative",
             showContent
               ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
+              : "opacity-0 translate-y-10",
           )}
         >
           {/* Enhanced floating arrows with parallax */}
@@ -230,15 +229,15 @@ export default function AboutMe() {
             "w-full md:w-1/2 flex flex-col justify-start items-stretch transition-all duration-700 delay-200 relative z-10",
             showContent
               ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
+              : "opacity-0 translate-y-10",
           )}
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
-                        About{' '}
-                        <span className="bg-gradient-to-r from-[#6F4E37] to-[#C68642] bg-clip-text text-transparent">
-                            Me
-                        </span>
-                    </h2>
+            About{" "}
+            <span className="bg-gradient-to-r from-[#6F4E37] to-[#C68642] bg-clip-text text-transparent">
+              Me
+            </span>
+          </h2>
           <p className="pt-5 text-lg">
             Hi, I&apos;m Lawrence A-J Soriano, a passionate and self-taught Web
             Developer specializing in WordPress and Shopify development. With
@@ -255,7 +254,9 @@ export default function AboutMe() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="skills-tools mt-8"
           >
-            <h3 className="font-bold mb-4 text-lg md:text-xl">Skills & Tools</h3>
+            <h3 className="font-bold mb-4 text-lg md:text-xl">
+              Skills & Tools
+            </h3>
             <div className="flex flex-row flex-wrap gap-x-4 gap-y-2 mt-6">
               {BADGES.map((badge) => (
                 <Badge
@@ -275,7 +276,7 @@ export default function AboutMe() {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="flex flex-row justify-start gap-4 pt-5"
           >
-            <AnimatedButton href="tel:09614650542">Contact Me</AnimatedButton>
+            <AnimatedButton href="#contact">Contact Me</AnimatedButton>
           </motion.div>
         </motion.div>
       </div>
